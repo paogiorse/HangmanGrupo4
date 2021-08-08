@@ -1,0 +1,101 @@
+﻿@model Ahorcado.MVC.Models.Hangman
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    string data = new JavaScriptSerializer().Serialize(Model);
+}
+@section scripts
+{
+    <script src="~/Scripts/Ahorcado/HangmanVM.js"></script>
+    <script type="text/javascript">
+        var hangVM = new HangmanVM(@Html.Raw(data));
+        ko.applyBindings(hangVM);
+    </script>
+}
+
+<div class="container">
+    <div class="panel panel-default" style="margin-top:20px;">
+        <div class="panel-heading">
+            <div class="panel-title">Ahorcado</div>
+        </div>
+        <div class="panel-body form-horizontal">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.WordToGuess)
+                    </div>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(m => m.WordToGuess, new Dictionary<String, object>
+                        {
+                            { "class", "form-control" },
+                            { "data-bind", "value:WordToGuess, enable:enableWordToGuess" },
+                            { "type", "password" }
+                        })
+                    </div>
+                    <div class="col-sm-6">
+                        <button id="btnInsertWord" class="btn" data-bind="click: insertWordToGuess, enable:enableWordToGuess">Ingresar</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(m => m.LetterTyped)
+                    </div>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(m => m.LetterTyped, new Dictionary<String, object>
+                        {
+                            { "class", "form-control" },
+                            { "data-bind", "value:LetterTyped, enable: !enableWordToGuess()" },
+                            { "maxlength", "1" }
+                        })
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="btnInsertLetter" class="btn" data-bind="click: tryLetter, enable: !enableWordToGuess() && ChancesLeft() > 0 && !Win()">Probar</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="btnResetGame" class="btn btn-primary" data-bind="click: resetGame, enable: (Win() || ChancesLeft() == 0) && !enableWordToGuess()">Resetear</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(m => m.GuessingWord)
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(m => m.GuessingWord, new Dictionary<String, object>
+                        {
+                            { "class", "form-control" },
+                            { "data-bind", "value:GuessingWord, enable: false" }
+                        })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(m => m.ChancesLeft)
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(m => m.ChancesLeft, new Dictionary<String, object>
+                        {
+                            { "class", "form-control" },
+                            { "data-bind", "value:ChancesLeft, enable: false" }
+                        })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(m => m.WrongLetters)
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(m => m.WrongLetters, new Dictionary<String, object>
+                        {
+                            { "class", "form-control" },
+                            { "data-bind", "value:WrongLetters, enable: false" }
+                        })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<canvas id="hangmanCanvas" width="679" height="290"></canvas>
