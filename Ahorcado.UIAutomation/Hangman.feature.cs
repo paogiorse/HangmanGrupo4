@@ -80,7 +80,7 @@ namespace Ahorcado.UIAutomation
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I have entered Ahorcado as the wordToGuess", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have generated the wordToGuess", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
  testRunner.When("I enter X as the typedLetter five times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10

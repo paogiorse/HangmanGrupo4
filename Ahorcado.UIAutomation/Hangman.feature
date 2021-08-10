@@ -5,6 +5,6 @@
 
 @mytag
 Scenario: Loose the game
-	Given I have entered Ahorcado as the wordToGuess
+	Given I have generated the wordToGuess
 	When I enter X as the typedLetter five times
 	Then I should be told that I lost

@@ -11,7 +11,7 @@ namespace Ahorcado.UIAutomation
     {
         IWebDriver driver;
         String baseURL;
-        Juego j;
+        Jugada j;
 
         [BeforeScenario]
         public void TestInitialize()
@@ -23,13 +23,11 @@ namespace Ahorcado.UIAutomation
             baseURL = "http://localhost";
         }
 
-        [Given(@"I have entered Ahorcado as the wordToGuess")]
+        [Given(@"I have generated the wordToGuess")]
         public void GivenIHaveEnteredAhorcadoAsTheWordToGuess()
         {
-            j = new Juego("Ahorcado");
+            j = new Jugada();
             driver.Navigate().GoToUrl(baseURL);
-            var txtPalabra = driver.FindElement(By.Id("WordToGuess"));
-            txtPalabra.SendKeys("Ahorcado");
             var btnInsertWord = driver.FindElement(By.Id("btnInsertWord"));
             btnInsertWord.SendKeys(Keys.Enter);
         }
