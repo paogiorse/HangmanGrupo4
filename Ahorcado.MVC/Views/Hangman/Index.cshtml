@@ -23,18 +23,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <div class="col-sm-3">
-                        @Html.LabelFor(m => m.WordToGuess)
-                    </div>
-                    <div class="col-sm-3">
-                        @Html.TextBoxFor(m => m.WordToGuess, new Dictionary<String, object>
-                        {
-                            { "class", "form-control" },
-                            { "data-bind", "value:WordToGuess, enable:enableWordToGuess" },
-                            { "type", "password" }
-                        })
-                    </div>
-                    <div class="col-sm-6">
-                        <button id="btnInsertWord" class="btn" data-bind="click: insertWordToGuess, enable:enableWordToGuess">Ingresar</button>
+                        <button id="btnInsertWord" class="btn" data-bind="click: insertWordToGuess, enable:enableWordToGuess">Empezar Juego</button>
                     </div>
                 </div>
                 <div class="form-group">

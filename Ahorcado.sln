@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahorcado.MVC", "Ahorcado.MV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahorcado.UIAutomation", "Ahorcado.UIAutomation\Ahorcado.UIAutomation.csproj", "{2365BAF0-EB92-48F5-9392-8A5C397A9512}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhorcadoGrupo4", "AhorcadoGrupo4\AhorcadoGrupo4.csproj", "{57F147B2-BDCF-4DDD-AF73-0733E3486377}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2365BAF0-EB92-48F5-9392-8A5C397A9512}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2365BAF0-EB92-48F5-9392-8A5C397A9512}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2365BAF0-EB92-48F5-9392-8A5C397A9512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F147B2-BDCF-4DDD-AF73-0733E3486377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F147B2-BDCF-4DDD-AF73-0733E3486377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F147B2-BDCF-4DDD-AF73-0733E3486377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F147B2-BDCF-4DDD-AF73-0733E3486377}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

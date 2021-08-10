@@ -9,7 +9,7 @@ namespace Ahorcado.MVC.Controllers
 {
     public class HangmanController : Controller
     {
-        public static Juego Juego { get; set; }
+        public static Jugada Juego { get; set; }
 
         // GET: Hangman
         public ActionResult Index()
@@ -20,26 +20,37 @@ namespace Ahorcado.MVC.Controllers
         [HttpPost]
         public JsonResult InsertWordToGuess(Hangman model)
         {
-            Juego = new Juego(model.WordToGuess);
-            model.ChancesLeft = Juego.ChancesRestantes;
+            Juego = new Jugada();
+            model.WordToGuess = Juego.palabraHardcodeada;
+            model.ChancesLeft = 7;
             return Json(model);
         }
 
         [HttpPost]
         public JsonResult TryLetter(Hangman model)
         {
-            Juego.insertarLetra(Convert.ToChar(model.LetterTyped));
-            model.Win = Juego.ValidarPalabra();
-            model.ChancesLeft = Juego.ChancesRestantes;
-            model.WrongLetters = string.Empty;
-            foreach (var wLetter in Juego.LetrasErradas)
+            Juego.letrasIngresadas.Add(Convert.ToChar(model.LetterTyped));
+            Juego.cantidadFallos = 0;
+            var palabraParcial = Juego.MostrarPalabra();
+            string estado = Juego.TerminarPartida(palabraParcial);
+            if(estado.Equals("Terminado"))
             {
-                model.WrongLetters += wLetter +  ",";
+                model.Win = true;
+            }
+            model.ChancesLeft = 7 - Juego.CantidadFallos();
+            model.WrongLetters = string.Empty;
+            model.GuessingWord = string.Empty;
+            foreach (var letter in Juego.ListaLetrasIngresadas())
+            {
+                if(!Juego.PerteneceLetraPalabra(letter.ToString()))
+                {
+                    model.WrongLetters += letter + ",";
+                }
             }
             model.GuessingWord = string.Empty;
-            foreach (var rLetter in Juego.PalabraIngresada)
+            foreach (var letter in palabraParcial)
             {
-                model.GuessingWord += rLetter + " ";
+                model.GuessingWord += letter + " ";
             }
             model.LetterTyped = string.Empty;
             return Json(model);
