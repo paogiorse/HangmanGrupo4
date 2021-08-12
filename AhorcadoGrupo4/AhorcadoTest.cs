@@ -5,7 +5,6 @@ using Xunit;
 
 namespace AhorcadoGrupo4
 {
-    //Test
     public class AhorcadoTest
     {
         //Ingreso Jugador
