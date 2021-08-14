@@ -19,12 +19,16 @@ jobs:
         dotnet-version: 2.1
     - name: Restore dependencies
       run: dotnet restore
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
     - name: Restore NuGet packages
       run: nuget restore Ahorcado.sln
+    - name: Build the Solution
+      run: msbuild Ahorcado.sln 
     - name: Build
       run: dotnet build --no-restore
     - name: Test
