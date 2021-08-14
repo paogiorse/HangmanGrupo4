@@ -22,7 +22,7 @@ jobs:
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
     - name: Restore NuGet packages
-      uses: nuget restore Ahorcado.sln
+      run: nuget restore Ahorcado.sln
     - name: Build
       run: dotnet build --no-restore
     - name: Test
