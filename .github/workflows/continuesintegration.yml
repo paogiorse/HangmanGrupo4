@@ -27,9 +27,9 @@ jobs:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
     - name: Restore NuGet packages
       run: nuget restore Ahorcado.sln
-    - name: Build the Solution
+    - name: Build Net Framework
       run: msbuild Ahorcado.sln 
-    - name: Build
+    - name: Build Net Core
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Test and Code Coverage
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
