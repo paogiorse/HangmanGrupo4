@@ -33,11 +33,17 @@ HangmanVM = function (data) {
                     self.drawHangman();
                     if(self.Win())
                     {
-                        self.Notify("win");
+                        //self.Notify("win");
+                        elemento = document.getElementById('winLabel');
+                        elemento.innerHTML = "Ganaste!";
+                        elemento.style.color = "green";
                     }
                     else if(self.ChancesLeft() == 0)
                     {
-                        self.Notify("loss");
+                        //self.Notify("loss");
+                        elemento = document.getElementById('winLabel');
+                        elemento.innerHTML = "Perdiste!";
+                        elemento.style.color = "red";
                     }
                 },
                 error: function () {
@@ -81,6 +87,8 @@ HangmanVM = function (data) {
         self.Win(false);
         var canvas = $("#hangmanCanvas")[0];
         canvas.width = canvas.width;
+        elemento = document.getElementById('winLabel');
+        elemento.innerHTML = "";
     }
 
     self.drawHangman = function () {

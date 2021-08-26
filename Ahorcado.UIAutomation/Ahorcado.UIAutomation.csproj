@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="HangmanSpecflow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinSpecflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -84,6 +85,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ahorcado.MVC\Ahorcado.MVC.csproj">
+      <Project>{a49f3f0b-e028-4e0e-9b49-7e91f665979f}</Project>
+      <Name>Ahorcado.MVC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ahorcado\Ahorcado.csproj">
       <Project>{9a70ca2b-4eec-4859-acaf-57d33cf34a59}</Project>
       <Name>Ahorcado</Name>

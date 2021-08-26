@@ -25,6 +25,16 @@
                     <div class="col-sm-3">
                         <button id="btnInsertWord" class="btn" data-bind="click: insertWordToGuess, enable:enableWordToGuess">Empezar Juego</button>
                     </div>
+                    <div class="col-sm-3">
+                        <label id="winLabel"></label>
+                    </div>
+                    <div class="col-sm-3" hidden>
+                        @Html.TextBoxFor(m => m.WordToGuess, new Dictionary<String, object>
+                        {
+                            { "class", "form-control" },
+                            { "data-bind", "value:WordToGuess, enable:enableWordToGuess" }
+                        })
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-3">
