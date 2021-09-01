@@ -42,7 +42,7 @@ jobs:
     - name: Deploy to IIS
       run: |
         iisreset /stop
-        Copy-Item ./ahorcado/* C:/inetpub/wwwroot/ahorcado -Recurse -Force
+        Copy-Item ./ahorcado/* C:/inetpub/wwwroot/ -Recurse -Force
         iisreset /start
     
     - name: Curl the website as a smoke test
