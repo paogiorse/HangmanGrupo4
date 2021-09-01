@@ -48,7 +48,7 @@ jobs:
     - name: Curl the website as a smoke test
       run: curl http://localhost
 
-    - name: Run Web Test
+    - name: Run Acceptance Tests
       run: |
         dotnet build --configuration Release .\Ahorcado.UIAutomation
         cd .\Ahorcado.UIAutomation
