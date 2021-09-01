@@ -33,3 +33,20 @@ jobs:
       run: dotnet build --no-restore
     - name: Test and Code Coverage
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+    - name: dotnet publish 
+        run: |
+        dotnet publish -c Release -o Ahorcado .\dotnet-core-webapp
+    - name: Deploy to IIS
+        run: |
+        iisreset /stop
+        Copy-Item ./Ahorcado/* C:/inetpub/wwwroot/ahorcado -Recurse -Force
+        iisreset /start
+    
+    - name: Curl the website as a smoke test
+        run: curl http://localhost
+
+    - name: Run Acceptance Tests
+        run: |
+        dotnet build --configuration Release .\Ahorcado.UIAutomation
+        cd .\Ahorcado.UIAutomation
+        dotnet test
