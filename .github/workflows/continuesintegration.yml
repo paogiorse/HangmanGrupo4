@@ -30,21 +30,15 @@ jobs:
     - name: Build Net Framework
       run: msbuild Ahorcado.sln 
     - name: Build Net Core
-      run: dotnet build --no-restore --configuration Release .\Ahorcado
+      run: dotnet build --no-restore
     - name: Test and Code Coverage
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
     # dotnet Publish and run Acceptance Tests
     - name: dotnet publish 
       run: |
-        dotnet publish -c Release -o ahorcadoweb .\Ahorcado.MVC
-
-    - name: Deploy to IIS
-      run: |
-        iisreset /stop
-        Copy-Item ./ahorcadoweb/* C:/inetpub/wwwroot/ -Recurse -Force
-        iisreset /start
-    
+        dotnet publish -p:PublishProfile=FolderProfile
+            
     - name: Curl the website as a smoke test
       run: curl http://localhost
 
