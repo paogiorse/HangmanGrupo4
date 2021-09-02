@@ -35,7 +35,7 @@ jobs:
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
     # dotnet Publish and run Acceptance Tests
-    - name: dotnet publish 
+    - name: dotnet Publish 
       run: |
         dotnet publish -c Release -o ahorcado .\Ahorcado
 
