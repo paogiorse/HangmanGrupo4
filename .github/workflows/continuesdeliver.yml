@@ -12,27 +12,15 @@ jobs:
     runs-on: self-hosted
     
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.1
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.2
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-    - name: Restore NuGet packages
-      run: nuget restore Ahorcado.sln
-    - name: Build Net Framework
-      run: msbuild Ahorcado.sln 
-    - name: Build Net Core
-      run: dotnet build --no-restore 
     
     # Deploy to Prod and run Acceptance Tests
+    - name: Build with dotnet
+      run: dotnet build --configuration Release .\ahorcado
 
     - name: dotnet publish 
       run: |
@@ -41,7 +29,7 @@ jobs:
     - name: Deploy to Prod
       run: |
         iisreset /stop
-        Copy-Item ./Ahorcado.UIAutomation/bin/Release/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
+        Copy-Item ./Ahorcado.UIAutomation/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
         iisreset /start
     
     - name: Curl the website as a smoke test
