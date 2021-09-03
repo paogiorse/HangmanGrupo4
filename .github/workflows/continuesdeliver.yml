@@ -26,7 +26,7 @@ jobs:
       run: |
         dotnet publish -c Release -o ahorcado .\ahorcado
 
-    - name: Deploy to Prod
+    - name: Deploy to Production
       run: |
         iisreset /stop
         Copy-Item ./Ahorcado.UIAutomation/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
