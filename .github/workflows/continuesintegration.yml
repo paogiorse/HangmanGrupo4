@@ -36,10 +36,14 @@ jobs:
 
     # Deploy to Prod and run Acceptance Tests
 
+    - name: dotnet publish 
+      run: |
+        dotnet publish -c Release -o ahorcadoweb .\Ahorcado
+
     - name: Deploy to IIS
       run: |
         iisreset /stop
-        Copy-Item -Path ./ahorcado.mvc/bin/* -Destination C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
+        Copy-Item -Path ./ahorcadoweb/* -Destination C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
         iisreset /start
     
     - name: Curl the website as a smoke test
