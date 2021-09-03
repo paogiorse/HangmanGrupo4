@@ -24,12 +24,12 @@ jobs:
 
     - name: dotnet publish 
       run: |
-        dotnet publish -c Release -o ahorcadoweb .\ahorcado
+        dotnet publish -c Release -o ahorcado .\ahorcado
 
     - name: Deploy to Prod
       run: |
         iisreset /stop
-        Copy-Item ./ahorcadoweb/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
+        Copy-Item ./ahorcado/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
         iisreset /start
     
     - name: Curl the website as a smoke test
