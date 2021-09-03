@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.1
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
     
     # Deploy to Prod and run Acceptance Tests
     - name: Build Net Framework
