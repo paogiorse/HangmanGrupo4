@@ -47,6 +47,7 @@ jobs:
 
     - name: Run Acceptance Tests
       run: |
+        msbuild Ahorcado.sln 
         dotnet build --configuration Release .\Ahorcado.UIAutomation
         cd .\Ahorcado.UIAutomation
         dotnet test
