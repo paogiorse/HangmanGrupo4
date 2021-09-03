@@ -60,7 +60,7 @@ namespace Ahorcado.UIAutomation
         }
         #endregion
 
-        #region Win The Game With Erros
+        #region Win The Game Without Erros
         [Given(@"I have generated the wordToGuess gato")]
         public void GivenIHaveGeneratedTheWordToGuessGato()
         {
@@ -104,7 +104,7 @@ namespace Ahorcado.UIAutomation
         }
         #endregion
 
-        #region Win The Game Without Erros
+        #region Win The Game With Erros
         [When(@"I enter letters x, x, g, a, t and o as the typedLetter")]
         public void WhenIEnterLettersXxgatoAsTheTypedLetter()
         {
