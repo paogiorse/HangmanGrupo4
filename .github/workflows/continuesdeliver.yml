@@ -29,7 +29,7 @@ jobs:
     - name: Deploy to Prod
       run: |
         iisreset /stop
-        Copy-Item ./ahorcado/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
+        Copy-Item ./Ahorcado.UIAutomation/bin/Release/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
         iisreset /start
     
     - name: Curl the website as a smoke test
