@@ -24,6 +24,8 @@ jobs:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
     - name: Restore NuGet packages
       run: nuget restore Ahorcado.sln
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
     
     # Deploy to Prod and run Acceptance Tests
     - name: Build with dotnet
@@ -44,6 +46,6 @@ jobs:
 
     - name: Run Acceptance Tests
       run: |
-        dotnet build --configuration Release .\Ahorcado.UIAutomation
+        msbuild .\Ahorcado.UIAutomation
         cd .\Ahorcado.UIAutomation
         dotnet test
