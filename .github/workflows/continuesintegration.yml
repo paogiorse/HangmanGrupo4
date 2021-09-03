@@ -38,12 +38,12 @@ jobs:
 
     - name: dotnet publish 
       run: |
-        dotnet publish -c Release -o ahorcadoweb .\Ahorcado
+        dotnet publish -c Release -o ahorcado .\Ahorcado
 
     - name: Deploy to IIS
       run: |
         iisreset /stop
-        Copy-Item -Path ./ahorcadoweb/* -Destination C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
+        Copy-Item -Path ./ahorcado/Ahorcado.UIAutomation/bin/Release/* -Destination C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
         iisreset /start
     
     - name: Curl the website as a smoke test
