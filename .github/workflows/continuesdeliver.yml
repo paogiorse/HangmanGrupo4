@@ -31,6 +31,9 @@ jobs:
     - name: Build with dotnet
       run: dotnet build --configuration Release .\ahorcado
 
+    - name: Build MVC
+      run: msbuild .\Ahorcado.MVC
+
     - name: dotnet publish 
       run: |
         dotnet publish -c Release -o ahorcado .\ahorcado
@@ -38,7 +41,7 @@ jobs:
     - name: Deploy to Production
       run: |
         iisreset /stop
-        Copy-Item C:/Users/paola.giorsetti/Desktop/Ahorcado/Ahorcado.MVC/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
+        Copy-Item ./Ahorcado.MVC/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
         iisreset /start
     
     - name: Curl the website as a smoke test
