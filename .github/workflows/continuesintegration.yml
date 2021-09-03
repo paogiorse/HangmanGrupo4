@@ -1,4 +1,4 @@
-name: .NET
+name: .NET CI
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: self-hosted
+    runs-on: [windows-latest]
 
     steps:
     - uses: actions/checkout@v2
@@ -33,25 +33,3 @@ jobs:
       run: dotnet build --no-restore 
     - name: Test and Code Coverage
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-
-    # Deploy to Prod and run Acceptance Tests
-
-    - name: dotnet Publish 
-      run: |
-        dotnet publish -c Release -o ahorcado .\Ahorcado
-
-    - name: Deploy to IIS
-      run: |
-        iisreset /stop
-        Copy-Item -Path ./ahorcado/* -Destination C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
-        iisreset /start
-    
-    - name: Curl the website as a smoke test
-      run: curl http://localhost
-
-    - name: Run Acceptance Tests
-      run: |
-        msbuild Ahorcado.sln 
-        dotnet build --configuration Release .\Ahorcado.UIAutomation
-        cd .\Ahorcado.UIAutomation
-        dotnet test
