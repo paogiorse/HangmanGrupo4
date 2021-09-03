@@ -2,8 +2,9 @@ name: .NET CD
 
 on: 
   push:
-    branches:
-      - "self-hosted"
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
