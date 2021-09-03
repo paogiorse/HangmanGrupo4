@@ -48,4 +48,4 @@ jobs:
       run: |
         msbuild .\Ahorcado.UIAutomation
         cd .\Ahorcado.UIAutomation
-        dotnet test
+        Vstest.console.exe
