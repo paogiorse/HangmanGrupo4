@@ -19,6 +19,8 @@ jobs:
         dotnet-version: 2.1
     
     # Deploy to Prod and run Acceptance Tests
+    - name: Build Net Framework
+      run: msbuild Ahorcado.sln 
     - name: Build with dotnet
       run: dotnet build --configuration Release .\ahorcado
 
