@@ -27,10 +27,13 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
     
-    # Deploy to Prod and run Acceptance Tests
+    # Build and Run Tests with Code Coverage
     - name: Build with dotnet
       run: dotnet build --configuration Release .\ahorcado
+    - name: Test and Code Coverage
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
+    # Deploy to Prod and run Acceptance Tests
     - name: Build MVC
       run: msbuild .\Ahorcado.MVC
 
