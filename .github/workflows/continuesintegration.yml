@@ -1,35 +1,57 @@
 name: .NET CI
 
-on:
+on: 
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy:
 
-    runs-on: [windows-latest]
-
+    runs-on: self-hosted
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.1
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
+
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
     - name: Restore NuGet packages
       run: nuget restore Ahorcado.sln
-    - name: Build Net Framework
-      run: msbuild Ahorcado.sln 
-    - name: Build Net Core
-      run: dotnet build --no-restore 
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+    
+    # Build and Run Tests with Code Coverage
+    - name: Build with dotnet
+      run: dotnet build --configuration Release .\ahorcado
     - name: Test and Code Coverage
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+
+    # Deploy to Prod
+    - name: Build MVC
+      run: msbuild .\Ahorcado.MVC
+      
+    - name: Deploy to Production
+      run: |
+        iisreset /stop
+        Copy-Item ./Ahorcado.MVC/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
+        iisreset /start
+    
+    - name: Curl the website as a smoke test
+      run: curl http://localhost
+
+    # Run Acceptance Tests
+    - name: Build UIAutomation
+      run: msbuild .\Ahorcado.UIAutomation
+
+    - name: Setup VSTest.exe
+      uses: Malcolmnixon/Setup-VSTest@v4
+
+    - name: VSTest
+      run: vstest.console .\Ahorcado.UIAutomation\bin\Debug\Ahorcado.UIAutomation.dll
