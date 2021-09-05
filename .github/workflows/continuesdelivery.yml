@@ -33,7 +33,7 @@ jobs:
     - name: Test and Code Coverage
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
-    # Deploy to Prod and run Acceptance Tests
+    # Deploy to Prod
     - name: Build MVC
       run: msbuild .\Ahorcado.MVC
 
@@ -50,8 +50,12 @@ jobs:
     - name: Curl the website as a smoke test
       run: curl http://localhost
 
-    - name: Run Acceptance Tests
-      run: |
-        msbuild .\Ahorcado.UIAutomation
-        cd .\Ahorcado.UIAutomation
-        Vstest.console.exe
+    # Run Acceptance Tests
+    - name: Build UIAutomation
+      run: msbuild .\Ahorcado.UIAutomation
+
+    - name: Setup VSTest.exe
+      uses: Malcolmnixon/Setup-VSTest@v4
+
+    - name: VSTest
+      run: vstest.console .\Ahorcado.UIAutomation\bin\Debug\Ahorcado.UIAutomation.dll
