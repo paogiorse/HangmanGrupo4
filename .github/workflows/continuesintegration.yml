@@ -37,7 +37,7 @@ jobs:
     - name: Build MVC
       run: msbuild .\Ahorcado.MVC
       
-    - name: Deploy to Production
+    - name: Deploy to production
       run: |
         iisreset /stop
         Copy-Item ./Ahorcado.MVC/* C:/inetpub/wwwroot/ahorcadoweb -Recurse -Force
