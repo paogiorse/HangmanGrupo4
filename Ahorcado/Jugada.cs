@@ -14,7 +14,7 @@ namespace Ahorcado
         public string dificultad;
         public char[] palabraParcial;
         public List<char> letrasIngresadas = new List<char>();
-        public List<string> opcionesPalabras = new List<string>() { "gato" };
+        public List<string> opcionesPalabras = new List<string>() { "gato", "perro", "barco", "casa", "pelota" };
         public int cantidadFallos = 0;
 
         public Jugada()

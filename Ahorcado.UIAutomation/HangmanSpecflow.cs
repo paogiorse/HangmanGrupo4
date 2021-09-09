@@ -25,10 +25,10 @@ namespace Ahorcado.UIAutomation
         }
 
         #region Loose The Game
+
         [Given(@"I have generated the wordToGuess")]
         public void GivenIHaveEnteredAhorcadoAsTheWordToGuess()
         {
-            j = new Jugada();
             driver.Navigate().GoToUrl(baseURL);
             var btnInsertWord = driver.FindElement(By.Id("btnInsertWord"));
             btnInsertWord.SendKeys(Keys.Enter);
@@ -61,33 +61,20 @@ namespace Ahorcado.UIAutomation
         #endregion
 
         #region Win The Game Without Erros
-        [Given(@"I have generated the wordToGuess gato")]
-        public void GivenIHaveGeneratedTheWordToGuessGato()
-        {
-            driver.Navigate().GoToUrl(baseURL);
-            var btnInsertWord = driver.FindElement(By.Id("btnInsertWord"));
-            btnInsertWord.SendKeys(Keys.Enter);
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript("document.getElementById('WordToGuess').setAttribute('value', 'gato')");
-        }
 
-        [When(@"I enter letters g, a, t and o as the typedLetter")]
-        public void WhenIEnterLettersGatoAsTheTypedLetter()
+        [When(@"I enter only letters of the wordToGuess as the typedLetter")]
+        public void WhenIEnterLettersFromWordToGuessAsTheTypedLetter()
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
-            letterTyped.SendKeys("g");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
-            letterTyped.SendKeys("a");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
-            letterTyped.SendKeys("t");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
-            letterTyped.SendKeys("o");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
+
+            var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
+            foreach (var letter in wordToGuess)
+            {
+                letterTyped.SendKeys(letter.ToString());
+                btnInsertLetter.SendKeys(Keys.Enter);
+                Thread.Sleep(1000);
+            }
         }
 
         [Then(@"I Should be told that I Won and without errors")]
@@ -105,8 +92,8 @@ namespace Ahorcado.UIAutomation
         #endregion
 
         #region Win The Game With Erros
-        [When(@"I enter letters x, x, g, a, t and o as the typedLetter")]
-        public void WhenIEnterLettersXxgatoAsTheTypedLetter()
+        [When(@"I enter letters x, x and letters of the wordToGuess as the typedLetter")]
+        public void WhenIEnterLettersXxAndFromWordToGuessAsTheTypedLetter()
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
@@ -116,18 +103,14 @@ namespace Ahorcado.UIAutomation
             letterTyped.SendKeys("x");
             btnInsertLetter.SendKeys(Keys.Enter);
             Thread.Sleep(1000);
-            letterTyped.SendKeys("g");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
-            letterTyped.SendKeys("a");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
-            letterTyped.SendKeys("t");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
-            letterTyped.SendKeys("o");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
+
+            var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
+            foreach (var letter in wordToGuess)
+            {
+                letterTyped.SendKeys(letter.ToString());
+                btnInsertLetter.SendKeys(Keys.Enter);
+                Thread.Sleep(1000);
+            }
         }
 
         [Then(@"I Should be told that I Won and with errors")]
@@ -145,23 +128,20 @@ namespace Ahorcado.UIAutomation
         #endregion
 
         #region Reset
-        [When(@"I enter letters g, a, t and o as the typedLetter and click on Resetear button")]
+        [When(@"I enter letters of the wordToGuess as the typedLetter and click on Resetear button")]
         public void WhenIEnterLettersGatoAsTheTypedLetterAndClickReset()
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
-            letterTyped.SendKeys("g");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
-            letterTyped.SendKeys("a");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
-            letterTyped.SendKeys("t");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
-            letterTyped.SendKeys("o");
-            btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
+
+            var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
+            foreach (var letter in wordToGuess)
+            {
+                letterTyped.SendKeys(letter.ToString());
+                btnInsertLetter.SendKeys(Keys.Enter);
+                Thread.Sleep(1000);
+            }
+
             var reset = driver.FindElement(By.Id("btnResetGame"));
             reset.SendKeys(Keys.Enter);
             Thread.Sleep(1000);
