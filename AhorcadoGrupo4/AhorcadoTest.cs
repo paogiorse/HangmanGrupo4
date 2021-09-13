@@ -111,7 +111,6 @@ namespace AhorcadoGrupo4
             Assert.False(pertenece);
         }
 
-
         //Mostrar palabra
 
         //Comparar la palabra generada con la parcial
