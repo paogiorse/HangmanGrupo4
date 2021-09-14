@@ -43,7 +43,7 @@ jobs:
         Copy-Item ./Ahorcado.MVC/* C:/ahorcadoweb -Recurse -Force
         iisreset /start
     
-    - name: Curl the website as a smoke test
+    - name: Curl the website as a Smoke Test
       run: curl http://localhost
 
     # Run Acceptance Tests
