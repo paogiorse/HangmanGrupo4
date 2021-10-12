@@ -22,7 +22,6 @@ namespace AhorcadoGrupo4
             Assert.Equal(jugadorAnonimo, juego.nombreJugador);
         }
 
-
         //Seleccionar dificultad
 
         //Jugada sin dificultad 
