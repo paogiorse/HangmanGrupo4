@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
 using TechTalk.SpecFlow;
@@ -39,9 +40,11 @@ namespace Ahorcado.UIAutomation
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             for (int i = 0; i < 7; i++)
             {
                 letterTyped.SendKeys("X");
+                wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
             }
         }
@@ -67,13 +70,14 @@ namespace Ahorcado.UIAutomation
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
-
             var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             foreach (var letter in wordToGuess)
             {
-                letterTyped.SendKeys(letter.ToString());
+                letterTyped.SendKeys(letter.ToString());     
+                wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
             }
         }
 
@@ -97,19 +101,23 @@ namespace Ahorcado.UIAutomation
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             letterTyped.SendKeys("x");
+            wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
             btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             letterTyped.SendKeys("x");
+            wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
             btnInsertLetter.SendKeys(Keys.Enter);
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
 
             var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
             foreach (var letter in wordToGuess)
             {
                 letterTyped.SendKeys(letter.ToString());
+                wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
             }
         }
 
@@ -133,13 +141,15 @@ namespace Ahorcado.UIAutomation
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 
             var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
             foreach (var letter in wordToGuess)
             {
                 letterTyped.SendKeys(letter.ToString());
+                wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
             }
 
             var reset = driver.FindElement(By.Id("btnResetGame"));
