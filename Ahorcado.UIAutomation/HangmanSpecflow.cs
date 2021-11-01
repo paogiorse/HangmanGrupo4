@@ -73,13 +73,12 @@ namespace Ahorcado.UIAutomation
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
             var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
-            foreach (var letter in wordToGuess)
+            for (int i = 0; i < wordToGuess.Length; i++)
             {
-                letterTyped.SendKeys(letter.ToString());     
+                letterTyped.SendKeys(wordToGuess[i].ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
                 letterTyped.Clear();
-                //Thread.Sleep(1000);
             }
         }
 
@@ -108,21 +107,18 @@ namespace Ahorcado.UIAutomation
             wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
             btnInsertLetter.SendKeys(Keys.Enter);
             letterTyped.Clear();
-            //Thread.Sleep(1000);
             letterTyped.SendKeys("x");
             wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
             btnInsertLetter.SendKeys(Keys.Enter);
             letterTyped.Clear();
-            //Thread.Sleep(1000);
 
             var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
-            foreach (var letter in wordToGuess)
+            for (int i = 0; i < wordToGuess.Length; i++)
             {
-                letterTyped.SendKeys(letter.ToString());
+                letterTyped.SendKeys(wordToGuess[i].ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
                 letterTyped.Clear();
-                //Thread.Sleep(1000);
             }
         }
 
@@ -149,13 +145,13 @@ namespace Ahorcado.UIAutomation
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 
             var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
-            foreach (var letter in wordToGuess)
+            var length = wordToGuess.Length;
+            for(int i = 0; i < wordToGuess.Length; i++)
             {
-                letterTyped.SendKeys(letter.ToString());
+                letterTyped.SendKeys(wordToGuess[i].ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
                 letterTyped.Clear();
-                //Thread.Sleep(1000);
             }
 
             var reset = driver.FindElement(By.Id("btnResetGame"));
