@@ -68,6 +68,7 @@ namespace AhorcadoGrupo4
             Assert.Equal(juego.palabraHardcodeada, palabraGenerada);
         }
 
+
         //Ingresar letra y verificar si pertenece a la palabra
 
         //String vacio
