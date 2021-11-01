@@ -3,6 +3,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Threading;
 using TechTalk.SpecFlow;
 
@@ -71,11 +73,11 @@ namespace Ahorcado.UIAutomation
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
-            var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
+            var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value").ToList().Distinct();
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
-            for (int i = 0; i < wordToGuess.Length; i++)
+            foreach(var letter in wordToGuess)
             {
-                letterTyped.SendKeys(wordToGuess[i].ToString());
+                letterTyped.SendKeys(letter.ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
                 letterTyped.Clear();
@@ -112,10 +114,10 @@ namespace Ahorcado.UIAutomation
             btnInsertLetter.SendKeys(Keys.Enter);
             letterTyped.Clear();
 
-            var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
-            for (int i = 0; i < wordToGuess.Length; i++)
+            var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value").ToList().Distinct();
+            foreach (var letter in wordToGuess)
             {
-                letterTyped.SendKeys(wordToGuess[i].ToString());
+                letterTyped.SendKeys(letter.ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
                 letterTyped.Clear();
@@ -144,11 +146,10 @@ namespace Ahorcado.UIAutomation
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 
-            var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
-            var length = wordToGuess.Length;
-            for(int i = 0; i < wordToGuess.Length; i++)
+            var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value").ToList().Distinct();
+            foreach (var letter in wordToGuess)
             {
-                letterTyped.SendKeys(wordToGuess[i].ToString());
+                letterTyped.SendKeys(letter.ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
                 letterTyped.Clear();
