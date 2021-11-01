@@ -46,6 +46,7 @@ namespace Ahorcado.UIAutomation
                 letterTyped.SendKeys("X");
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
+                letterTyped.Clear();
             }
         }
 
@@ -77,6 +78,7 @@ namespace Ahorcado.UIAutomation
                 letterTyped.SendKeys(letter.ToString());     
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
+                letterTyped.Clear();
                 //Thread.Sleep(1000);
             }
         }
@@ -105,10 +107,12 @@ namespace Ahorcado.UIAutomation
             letterTyped.SendKeys("x");
             wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
             btnInsertLetter.SendKeys(Keys.Enter);
+            letterTyped.Clear();
             //Thread.Sleep(1000);
             letterTyped.SendKeys("x");
             wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
             btnInsertLetter.SendKeys(Keys.Enter);
+            letterTyped.Clear();
             //Thread.Sleep(1000);
 
             var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value");
@@ -117,6 +121,7 @@ namespace Ahorcado.UIAutomation
                 letterTyped.SendKeys(letter.ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
+                letterTyped.Clear();
                 //Thread.Sleep(1000);
             }
         }
@@ -149,6 +154,7 @@ namespace Ahorcado.UIAutomation
                 letterTyped.SendKeys(letter.ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
+                letterTyped.Clear();
                 //Thread.Sleep(1000);
             }
 
