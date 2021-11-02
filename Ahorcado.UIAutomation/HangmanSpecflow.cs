@@ -48,7 +48,7 @@ namespace Ahorcado.UIAutomation
                 letterTyped.SendKeys("X");
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
-                letterTyped.Clear();
+                //letterTyped.Clear();
             }
         }
 
@@ -80,7 +80,7 @@ namespace Ahorcado.UIAutomation
                 letterTyped.SendKeys(letter.ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
-                letterTyped.Clear();
+                //letterTyped.Clear();
             }
         }
 
@@ -108,11 +108,11 @@ namespace Ahorcado.UIAutomation
             letterTyped.SendKeys("x");
             wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
             btnInsertLetter.SendKeys(Keys.Enter);
-            letterTyped.Clear();
+            //letterTyped.Clear();
             letterTyped.SendKeys("x");
             wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
             btnInsertLetter.SendKeys(Keys.Enter);
-            letterTyped.Clear();
+            //letterTyped.Clear();
 
             var wordToGuess = driver.FindElement(By.Id("WordToGuess")).GetAttribute("value").ToList().Distinct();
             foreach (var letter in wordToGuess)
@@ -120,7 +120,7 @@ namespace Ahorcado.UIAutomation
                 letterTyped.SendKeys(letter.ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
-                letterTyped.Clear();
+                //letterTyped.Clear();
             }
         }
 
@@ -152,7 +152,7 @@ namespace Ahorcado.UIAutomation
                 letterTyped.SendKeys(letter.ToString());
                 wait.Until(ExpectedConditions.ElementToBeClickable(btnInsertLetter));
                 btnInsertLetter.SendKeys(Keys.Enter);
-                letterTyped.Clear();
+                //letterTyped.Clear();
             }
 
             var reset = driver.FindElement(By.Id("btnResetGame"));
