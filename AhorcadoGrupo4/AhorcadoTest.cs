@@ -24,6 +24,7 @@ namespace AhorcadoGrupo4
 
         //Seleccionar dificultad
 
+
         //Jugada sin dificultad 
         [Fact]
         public void JugadaSinDificultad()
